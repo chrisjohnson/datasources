@@ -104,12 +104,7 @@ class SoapSource extends DataSource {
  */ 
 	public function connect() {
 		$options = $this->_parseConfig();
-		try {
-			$this->client = new SoapClient($this->config['wsdl'], $options);
-		} catch(SoapFault $fault) {
-			$this->error = $fault->faultstring;
-			$this->showError();
-		}
+		$this->client = new SoapClient($this->config['wsdl'], $options);
 
 		if ($this->client) {
 			$this->connected = true;
@@ -162,13 +157,7 @@ class SoapSource extends DataSource {
 			return false;
 		}
 		
-		try {
-			$result = $this->client->__soapCall($method, $queryData);
-		} catch (SoapFault $fault) {
-			$this->error = $fault->faultstring;
-			$this->showError();
-			return false;
-		}
+		$result = $this->client->__soapCall($method, $queryData);
 		return $result;
 	}
 
