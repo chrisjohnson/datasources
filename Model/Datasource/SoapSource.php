@@ -25,7 +25,7 @@
  * @subpackage datasources.models.datasources
  */
 class SoapSource extends DataSource {
-    
+
 /**
  * Description
  *
@@ -101,7 +101,7 @@ class SoapSource extends DataSource {
  *
  * @param array $config An array defining the new configuration settings
  * @return boolean True on success, false on failure
- */ 
+ */
 	public function connect() {
 		$options = $this->_parseConfig();
 		$this->client = new SoapClient($this->config['wsdl'], $options);
@@ -128,10 +128,10 @@ class SoapSource extends DataSource {
  *
  * @return array List of SOAP methods
  */
-	public function listSources() {
+	public function listSources($data = null) {
 		return $this->client->__getFunctions();
 	}
-	
+
 /**
  * Query the SOAP server with the given method and parameters
  *
@@ -156,7 +156,7 @@ class SoapSource extends DataSource {
 		} else {
 			return false;
 		}
-		
+
 		$result = $this->client->__soapCall($method, $queryData);
 		return $result;
 	}
